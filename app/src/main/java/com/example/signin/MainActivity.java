@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int RC_SIGN_IN = 9001;
 
     private GoogleSignInClient mGoogleSignInClient;
-    CallbackManager callbackManager;
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
+        findViewById(R.id.login_button).setOnClickListener(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -60,20 +61,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
-        signInButton.setColorScheme(SignInButton.COLOR_LIGHT);
-
     }
+
+
+    private void loginFacebook() {
+        callbackManager = CallbackManager.Factory.create();
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        Toast.makeText(MainActivity.this,"Facebook Sign up successful",Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Toast.makeText(MainActivity.this,"Sign up cancel",Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                        Toast.makeText(MainActivity.this,"Something wrong",Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
 
     private void updateUI(@Nullable GoogleSignInAccount account) {
         if (account != null) {
-            Toast.makeText(this, "Successful login",Toast.LENGTH_LONG).show();
-        }else {
-            Toast.makeText(this, "Plz login",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(MainActivity.this, HomePage.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(this, "Plz login", Toast.LENGTH_LONG).show();
         }
     }
 
     // [START signIn]
-    private void signIn() {
+    private void signInGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -89,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Toast.makeText(this, "Sign in failed", Toast.LENGTH_LONG).show();
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
             updateUI(null);
         }
@@ -106,12 +131,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void onStart() {
         super.onStart();
 
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+        if (isLoggedIn)
+            Toast.makeText(MainActivity.this, "Already login facebook", Toast.LENGTH_LONG).show();
+        else {
+            Intent intent = new Intent(MainActivity.this, HomePage.class);
+            startActivity(intent);
+            finish();
+        }
         // [START on_start_sign_in]
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
@@ -124,7 +159,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sign_in_button:
-                signIn();
+                signInGoogle();
+                break;
+            case R.id.login_button:
+                loginFacebook();
                 break;
         }
     }
