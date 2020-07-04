@@ -39,7 +39,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String EMAIL = "email";
-    private static final String TAG = "SignInActivity";
+    private static final String TAG = "MainActivity";
     private static final int RC_SIGN_IN = 9001;
 
     private GoogleSignInClient mGoogleSignInClient;
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.login_button).setOnClickListener(this);
+        findViewById(R.id.sign_up).setOnClickListener(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
+
     }
 
 
@@ -71,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         Toast.makeText(MainActivity.this,"Facebook Sign up successful",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(MainActivity.this, HomePage.class);
+                        startActivity(intent);
+                        finish();
                     }
 
                     @Override
@@ -140,8 +145,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-        if (isLoggedIn)
-            Toast.makeText(MainActivity.this, "Already login facebook", Toast.LENGTH_LONG).show();
+        if (!isLoggedIn)
+            Toast.makeText(MainActivity.this, "plz login facebook", Toast.LENGTH_LONG).show();
         else {
             Intent intent = new Intent(MainActivity.this, HomePage.class);
             startActivity(intent);
@@ -163,6 +168,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.login_button:
                 loginFacebook();
+                break;
+            case R.id.sign_up:
+                Intent intent=new Intent(MainActivity.this,SignUp.class);
+                startActivity(intent);
                 break;
         }
     }
