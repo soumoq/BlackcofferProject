@@ -2,10 +2,42 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+
+    <EditText
+        android:id="@+id/explore_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/tags_search_style"
+        android:fontFamily="serif"
+        android:drawableLeft="@drawable/ic_baseline_search_24"
+        android:hint="  Search by tags..."
+        android:imeOptions="actionDone"
+        android:layout_toLeftOf="@+id/fab"
+        android:inputType="textPersonName"
+        android:padding="15dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tags Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#2471A3"
+        android:background="#2471A3"
+        android:src="@drawable/ic_baseline_add_24" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:background="@drawable/tags_button_style"
+        android:text="Broadcast"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
 </RelativeLayout>

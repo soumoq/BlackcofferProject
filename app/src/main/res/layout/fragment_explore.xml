@@ -1,11 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <EditText
+        android:id="@+id/explore_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/explore_search_style"
+        android:fontFamily="serif"
+        android:drawableLeft="@drawable/ic_baseline_search_24"
+        android:hint="  Search by tags..."
+        android:imeOptions="actionDone"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:layout_toLeftOf="@id/filter"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Explore Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+        android:layout_marginRight="20dp"
+        android:id="@+id/filter"
+        android:background="#00000000"
+        android:src="@drawable/ic_baseline_filter_list_24"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"/>
+
+
+    <ListView
+        android:id="@+id/explore_list_view"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/explore_edit_text"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
 </RelativeLayout>

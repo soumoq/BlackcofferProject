@@ -49,5 +49,5 @@
         android:layout_height = "wrap_content"
         android:layout_marginTop="9dp"
         android:layout_alignParentRight="true"
-        android:src = "@drawable/ic_baseline_notifications_24" />
+        android:src = "@drawable/ic_outline_notifications_24" />
 </RelativeLayout>
