@@ -62,5 +62,4 @@ class MyListAdopter extends ArrayAdapter<String> {
 
     }
 
-    ;
 }

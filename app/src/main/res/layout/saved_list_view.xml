@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="30dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/saved_profile_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15dp"
+                android:src="@mipmap/ic_launcher"
+                app:civ_border_color="#00000000"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:id="@+id/saved_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/saved_profile_image"
+                android:text="User Name"
+                android:textColor="@color/browser_actions_text_color"
+                android:textSize="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/saved_username"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/browser_actions_text_color"
+                android:layout_toRightOf="@+id/saved_profile_image"
+                android:text="Company"
+                android:textSize="18dp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:background="#00000000"
+                android:src="@drawable/heart" />
+
+            <TextView
+                android:id="@+id/saved_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/saved_profile_image"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:text="Short answer: you shouldn't. Using a VectorDrawable with CircleImageView is very inefficient. You should modify your vectors to be in a circular shape and use them with a regular ImageView instead."
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/saved_description"
+                android:text="#Gethub"
+                android:textColor="#2471A3"
+                android:textSize="22dp" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
