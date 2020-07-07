@@ -6,4 +6,10 @@
     <string name="tags">Tags</string>
     <string name="explore">Explore</string>
     <string name="saved">Saved</string>
+
+    <string name="welcome">Welcome</string>
+    <string name="instruction">Please login or sign up to continue using Helloji</string>
+    <string name="enterProcess">Enter via social network</string>
+    <string name="sign_up">Sign up</string>
+    <string name="login_email">or login via email</string>
 </resources>

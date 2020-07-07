@@ -14,6 +14,8 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -45,10 +47,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private GoogleSignInClient mGoogleSignInClient;
     private CallbackManager callbackManager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
+        getSupportActionBar().hide(); //hide the title bar
         setContentView(R.layout.activity_main);
+
+        LoginButton loginButton=findViewById(R.id.login_button);
+        loginButton.setLoginText("Sign in");
+        loginButton.setLogoutText("");
+
+        TextView textView = findViewById(R.id.mLogin);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, Login.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
         findViewById(R.id.login_button).setOnClickListener(this);
@@ -72,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        Toast.makeText(MainActivity.this,"Facebook Sign up successful",Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(MainActivity.this, HomePage.class);
                         startActivity(intent);
                         finish();
@@ -80,12 +98,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onCancel() {
-                        Toast.makeText(MainActivity.this,"Sign up cancel",Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Sign up cancel", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onError(FacebookException exception) {
-                        Toast.makeText(MainActivity.this,"Something wrong",Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, "Something wrong", Toast.LENGTH_LONG).show();
                     }
                 });
     }
@@ -97,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
             finish();
         } else {
-            Toast.makeText(this, "Plz login", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -135,8 +152,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
-        }
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        } else
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+
+
     }
 
     @Override
@@ -145,9 +164,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-        if (!isLoggedIn)
-            Toast.makeText(MainActivity.this, "plz login facebook", Toast.LENGTH_LONG).show();
-        else {
+        if (!isLoggedIn) {
+        } else {
             Intent intent = new Intent(MainActivity.this, HomePage.class);
             startActivity(intent);
             finish();
@@ -170,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 loginFacebook();
                 break;
             case R.id.sign_up:
-                Intent intent=new Intent(MainActivity.this,SignUp.class);
+                Intent intent = new Intent(MainActivity.this, SignUp.class);
                 startActivity(intent);
                 break;
         }

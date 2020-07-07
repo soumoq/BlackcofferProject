@@ -1,37 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignUp">
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/sign_in_button1"
-        android:layout_marginBottom="30dp" />
-
-    <EditText
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/login_button1"
-        android:inputType="number"
-        android:id="@+id/get_number"/>
+        android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="OTP"
-        android:layout_below="@+id/get_number"
-        android:id="@+id/send_otp"/>
+        <TextView
+            android:id="@+id/welcomeS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text="Sign Up"
+            android:textColor="#000000"
+            android:textSize="35sp" />
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/enterVia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/welcomeS"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Please sign up to continue using app" />
+
+
+        <TextView
+            android:id="@+id/enterProcess1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/welcomeS"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:text="@string/enterProcess" />
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button1"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_height="35dp"
+            android:background="@drawable/main_activity_button_google"
+            android:layout_below="@+id/enterProcess1"
+            android:layout_marginTop="30dp" />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/enterProcess1"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="97dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:layout_toRightOf="@+id/sign_in_button1"
+            android:background="@drawable/main_activity_button" />
+
+        <TextView
+            android:id="@+id/enterViaSocal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sign_in_button1"
+            android:text="or sign up with phone"
+            android:layout_centerHorizontal="true"/>
+
+        <EditText
+            android:id="@+id/phone_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/explore_search_style"
+            android:fontFamily="serif"
+            android:hint="Phone"
+            android:imeOptions="actionDone"
+            android:padding="10dp"
+            android:layout_below="@+id/enterViaSocal"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/password_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/explore_search_style"
+            android:fontFamily="serif"
+            android:hint="Password"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:layout_below="@+id/phone_edit_text"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/sign_up_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/password_edit_text"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/main_activity_button"
+            android:text="@string/sign_up"
+            android:textAllCaps="false"
+            android:textColor="#FDFEFE" />
+
+        <TextView
+            android:id="@+id/already_have_account_signUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sign_up_phone"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Already have an account ?" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/slogin"
+            android:layout_below="@+id/sign_up_phone"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/already_have_account_signUp"
+            android:text="Login"
+            android:textColor="@color/com_facebook_blue" />
+
+
+
+    </RelativeLayout>
+</ScrollView>
