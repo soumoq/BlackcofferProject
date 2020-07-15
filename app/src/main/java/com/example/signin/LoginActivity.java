@@ -10,9 +10,7 @@ import android.widget.TextView;
 
 import com.facebook.login.widget.LoginButton;
 
-import java.util.zip.Inflater;
-
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +28,7 @@ public class Login extends AppCompatActivity {
         goSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(Login.this,MainActivity.class);
+                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(intent);
                 finish();
             }

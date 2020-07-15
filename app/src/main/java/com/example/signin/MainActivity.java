@@ -3,16 +3,9 @@ package com.example.signin;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Base64;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -22,7 +15,6 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.LoginStatusCallback;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -33,10 +25,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -63,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Login.class);
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -91,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
-                        Intent intent = new Intent(MainActivity.this, HomePage.class);
+                        Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -111,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void updateUI(@Nullable GoogleSignInAccount account) {
         if (account != null) {
-            Intent intent = new Intent(MainActivity.this, HomePage.class);
+            Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
             startActivity(intent);
             finish();
         } else {
@@ -166,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
         if (!isLoggedIn) {
         } else {
-            Intent intent = new Intent(MainActivity.this, HomePage.class);
+            Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
             startActivity(intent);
             finish();
         }
@@ -188,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 loginFacebook();
                 break;
             case R.id.sign_up:
-                Intent intent = new Intent(MainActivity.this, SignUp.class);
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
                 startActivity(intent);
                 break;
         }

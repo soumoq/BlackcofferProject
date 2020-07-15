@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -22,7 +21,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class Otp extends AppCompatActivity {
+public class OtpActivity extends AppCompatActivity {
 
     private String phone;
     private String password;
@@ -43,6 +42,9 @@ public class Otp extends AppCompatActivity {
         Intent intent = getIntent();
         phone = intent.getStringExtra("phone");
         password = intent.getStringExtra("password");
+
+        Toast.makeText(this,password,Toast.LENGTH_LONG).show();
+        sendOtp(phone);
 
         otpVerify = findViewById(R.id.otp_verify);
         otpVerify.setOnClickListener(new View.OnClickListener() {
@@ -81,14 +83,14 @@ public class Otp extends AppCompatActivity {
             if (code != null) {
                 EditText otpEditText = findViewById(R.id.opt_edit_text);
                 otpEditText.setText(code);
-                Toast.makeText(Otp.this, "Successful", Toast.LENGTH_LONG).show();
+                Toast.makeText(OtpActivity.this, "Successful", Toast.LENGTH_LONG).show();
                 verifyCode(code);
             }
         }
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
-            Toast.makeText(Otp.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(OtpActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     };
 
@@ -103,12 +105,12 @@ public class Otp extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Intent intent=new Intent(Otp.this,HomePage.class);
+                    Intent intent=new Intent(OtpActivity.this, HomePageActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 }else
                 {
-                    Toast.makeText(Otp.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(OtpActivity.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
                 }
             }
         });
