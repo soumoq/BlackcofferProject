@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">SignIn</string>
-    <string name="facebook_app_id">573426176673720</string>
-    <string name="fb_login_protocol_scheme">fb573426176673720</string>
+
+    <string name="facebook_app_id">670253300370870</string>
+    <string name="fb_login_protocol_scheme">fb670253300370870</string>
+
     <string name="trending">Trending</string>
     <string name="tags">Tags</string>
     <string name="explore">Explore</string>
