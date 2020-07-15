@@ -212,7 +212,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.login_button:
-                loginFacebook();
+                if (new InternetCheck().internetCheck(MainActivity.this))
+                    loginFacebook();
+                else
+                    Toast.makeText(MainActivity.this, "Internet is not available", Toast.LENGTH_LONG).show();
                 break;
 
             case R.id.sign_up:

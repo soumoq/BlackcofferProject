@@ -63,6 +63,8 @@ public class LoginActivity extends AppCompatActivity {
                 signInGoogle();
             }
         });
+
+
     }
 
     private void signInGoogle() {
