@@ -3,7 +3,10 @@ package com.example.signin;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().hide(); //hide the title bar
         setContentView(R.layout.activity_main);
 
-        LoginButton loginButton=findViewById(R.id.login_button);
+        LoginButton loginButton = findViewById(R.id.login_button);
         loginButton.setLoginText("Sign in");
         loginButton.setLogoutText("");
 
@@ -106,14 +109,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    // [START signIn]
+    // [START signIn for google]
     private void signInGoogle() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
-    // [END signIn]
+    // [END signIn for google]
 
-    // [START handleSignInResult]
+    // [START handleSignInResult for google]
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             updateUI(null);
         }
     }
-    // [END handleSignInResult]
+    // [END handleSignInResult for google]
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -170,11 +173,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sign_in_button:
-                signInGoogle();
+                if (new InternetCheck().internetCheck(MainActivity.this))
+                    signInGoogle();
+                else
+                    Toast.makeText(MainActivity.this, "Internet is not available", Toast.LENGTH_LONG).show();
                 break;
+
             case R.id.login_button:
                 loginFacebook();
                 break;
+
             case R.id.sign_up:
                 Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
                 startActivity(intent);
