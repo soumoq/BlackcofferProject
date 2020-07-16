@@ -22,8 +22,6 @@ import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final int RC_SIGN_IN = 9001;
-    private GoogleSignInClient mGoogleSignInClient;
     private static final String TAG = "LoginActivity";
 
     private SignInButton googleSignInButton;
@@ -51,16 +49,18 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-        //start google signing in
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
         googleSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 signInGoogle();
+            }
+        });
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
             }
         });
 
@@ -71,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(LoginActivity.this, MainActivity.class));
         finish();
     }
+
 
 
 }

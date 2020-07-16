@@ -99,13 +99,24 @@
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
+        <RadioButton
+            android:id="@+id/radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/password_edit_text"
+            android:layout_marginLeft="20dp"
+            android:text="I agree with Privacy and Policy"
+            android:buttonTint="@color/com_facebook_blue"
+            />
+
         <Button
             android:id="@+id/sign_up_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/password_edit_text"
+            android:layout_below="@+id/radio_button"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="15dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/main_activity_button"
             android:text="@string/sign_up"
