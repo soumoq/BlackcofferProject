@@ -32,6 +32,7 @@ public class OtpActivity extends AppCompatActivity {
     private String verificationId;
     private FirebaseAuth mAuth;
     private TextView sendAgain;
+    private EditText otpEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +48,17 @@ public class OtpActivity extends AppCompatActivity {
         phone = intent.getStringExtra("phone");
         password = intent.getStringExtra("password");
 
-        Toast.makeText(this, password, Toast.LENGTH_LONG).show();
         sendOtp(phone);
 
         sendAgain = findViewById(R.id.send_again);
         otpVerify = findViewById(R.id.otp_verify);
+        otpEditText = findViewById(R.id.opt_edit_text);
         otpVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //sendOtp(phone);
-                Toast.makeText(OtpActivity.this,"OTP verify automatically",Toast.LENGTH_LONG).show();
+                String otp = otpEditText.getText().toString();
+                verifyCode(otp);
             }
         });
 
