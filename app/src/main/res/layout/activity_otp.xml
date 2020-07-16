@@ -49,6 +49,23 @@
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
+    <TextView
+        android:id="@+id/do_not_receive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/opt_edit_text"
+        android:layout_marginLeft="100dp"
+        android:text="Don't received the code? "/>
+
+    <TextView
+        android:id="@+id/send_again"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send again"
+        android:layout_toRightOf="@+id/do_not_receive"
+        android:layout_below="@+id/opt_edit_text"
+        />
+
     <Button
         android:id="@+id/otp_verify"
         android:layout_width="match_parent"

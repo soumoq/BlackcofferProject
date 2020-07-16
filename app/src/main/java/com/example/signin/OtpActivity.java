@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +31,7 @@ public class OtpActivity extends AppCompatActivity {
     private Button otpVerify;
     private String verificationId;
     private FirebaseAuth mAuth;
+    private TextView sendAgain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +47,30 @@ public class OtpActivity extends AppCompatActivity {
         phone = intent.getStringExtra("phone");
         password = intent.getStringExtra("password");
 
-        Toast.makeText(this,password,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, password, Toast.LENGTH_LONG).show();
         sendOtp(phone);
 
+        sendAgain = findViewById(R.id.send_again);
         otpVerify = findViewById(R.id.otp_verify);
         otpVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //sendOtp(phone);
+                Toast.makeText(OtpActivity.this,"OTP verify automatically",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        SpannableString content = new SpannableString("Send again");
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        sendAgain.setText(content);
+        sendAgain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 sendOtp(phone);
             }
         });
     }
+
 
     private void sendOtp(String phoneNumber) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
@@ -94,9 +111,8 @@ public class OtpActivity extends AppCompatActivity {
         }
     };
 
-    private void verifyCode(String code)
-    {
-        PhoneAuthCredential credential=PhoneAuthProvider.getCredential(verificationId,code);
+    private void verifyCode(String code) {
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
         signInWithCredential(credential);
     }
 
@@ -104,13 +120,12 @@ public class OtpActivity extends AppCompatActivity {
         mAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Intent intent=new Intent(OtpActivity.this, HomePageActivity.class);
+                if (task.isSuccessful()) {
+                    Intent intent = new Intent(OtpActivity.this, HomePageActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
-                }else
-                {
-                    Toast.makeText(OtpActivity.this,task.getException().getMessage(),Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(OtpActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
         });
