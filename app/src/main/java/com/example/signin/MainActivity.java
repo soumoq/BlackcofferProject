@@ -188,17 +188,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
         if (!isLoggedIn) {
+            // [START on_start_sign_in]
+            // Check for existing Google Sign In account, if the user is already signed in
+            // the GoogleSignInAccount will be non-null.
+            GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+            updateUI(account);
+            // [END on_start_sign_in]
         } else {
             Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
             startActivity(intent);
             finish();
         }
-        // [START on_start_sign_in]
-        // Check for existing Google Sign In account, if the user is already signed in
-        // the GoogleSignInAccount will be non-null.
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        updateUI(account);
-        // [END on_start_sign_in]
+
     }
 
     @Override
